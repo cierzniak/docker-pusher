@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ApiError } from './api-error';
 
-export const errorConverter = (
+export const convertError = (
   err: Error & { statusCode?: number; stack?: string },
   _: Request,
   __: Response,
@@ -15,7 +15,7 @@ export const errorConverter = (
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const errorHandler = (err: ApiError, _: Request, res: Response, __: NextFunction) => {
+export const handleError = (err: ApiError, _: Request, res: Response, __: NextFunction) => {
   const { statusCode, message } = err;
 
   res.status(statusCode).send({
