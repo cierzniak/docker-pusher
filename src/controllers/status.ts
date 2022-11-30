@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { handleDocker } from '../middlewares/check-docker';
 import { RouterCollection } from './index';
 
 const StatusAction = (_: Request, res: Response) => {
@@ -12,5 +13,6 @@ export const StatusController = [
     path: '/status',
     method: 'get',
     action: StatusAction,
+    middlewares: [handleDocker],
   },
 ] as RouterCollection;

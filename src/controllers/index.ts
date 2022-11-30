@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router as ExpressRouter } from 'express';
 import { AppInfoController } from './app-info';
 import { StatusController } from './status';
+import { DockerController } from './docker';
 
 type RouteAction = (req: Request, res: Response, next: NextFunction) => void;
 
@@ -13,12 +14,12 @@ type Router = {
 
 export type RouterCollection = Router[];
 
+const fillActions = ({ path, method, action, middlewares = [] }: Router) => {
+  routes[method](path, ...middlewares, action);
+};
+
 export const routes = ExpressRouter();
 
-AppInfoController.forEach(({ path, method, action, middlewares = [] }) => {
-  routes[method](path, ...middlewares, action);
-});
-
-StatusController.forEach(({ path, method, action, middlewares = [] }) => {
-  routes[method](path, ...middlewares, action);
-});
+AppInfoController.forEach(fillActions);
+StatusController.forEach(fillActions);
+DockerController.forEach(fillActions);
