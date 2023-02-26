@@ -9,7 +9,6 @@ RUN yarn install --frozen-lockfile
 COPY ./ ./
 RUN yarn build
 COPY ./yarn.lock ./dist/
-
 RUN yarn install --production --frozen-lockfile --cwd=dist
 
 FROM node:${NODE_VERSION}-alpine AS runtime
