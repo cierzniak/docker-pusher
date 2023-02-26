@@ -1,7 +1,5 @@
-/dist/
-/node_modules/
-/env*
-
-/README.md
-/Dockerfile
-/.*ignore
+**/*.*
+!src/
+!package.json
+!tsconfig.json
+!yarn.lock

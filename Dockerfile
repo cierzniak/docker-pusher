@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18.12.1
+ARG NODE_VERSION=18.14.2
 
 FROM node:${NODE_VERSION}-alpine AS build
 WORKDIR /app
@@ -19,5 +19,7 @@ CMD ["/usr/local/bin/node", "/app/src/index.js"]
 HEALTHCHECK --interval=15s --timeout=3s \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/status || exit 1
 
-RUN apk add --no-cache tini
+ENV NODE_ENV=production
+RUN apk add --no-cache \
+      tini
 COPY --from=build /app/dist/ /app/
