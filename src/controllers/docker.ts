@@ -16,7 +16,6 @@ type UpdateServiceRequest = {
 const UpdateServiceAction = asyncHandler(async (req: Request, res: Response) => {
   const services = await getServices();
   const data = req.body as UpdateServiceRequest;
-  console.log('DEBUG data', data);
   data.images.forEach((image) => {
     const [service] = services.filter((s) => s.image === image);
     if (service) {
