@@ -8,7 +8,7 @@ cURL example:
 
 ```shell
 $ curl --request POST \
-  --url https://docker.zsl.gda.pl/webhook/services \
+  --url http://localhost:3000/services \
   --header 'Content-Type: application/json' \
   --header 'X-Api-Key: my-s3cret-key' \
   --data '{"repository": "username/repository",
