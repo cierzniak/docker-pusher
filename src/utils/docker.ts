@@ -34,7 +34,7 @@ export const updateService = async ({ id, image }: Service) => {
       _query: { registryAuthFrom: 'spec' | 'previous-spec'; version: number };
       _body: ServiceSpec;
     },
-    (error, result) => console.log(error, result),
+    () => undefined,
   );
 };
 

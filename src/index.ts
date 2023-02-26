@@ -20,4 +20,5 @@ app.use(handleError);
 
 app.listen(3000, () => {
   console.log('Docker Webhook is working and listening on http://0.0.0.0:3000');
+  console.log(`env: ${process.env['NODE_ENV']}`);
 });
