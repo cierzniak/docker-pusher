@@ -15,18 +15,16 @@ type UpdateServiceRequest = {
 
 const UpdateServiceAction = asyncHandler(async (req: Request, res: Response) => {
   const services = await getServices();
-  const data = req.body as UpdateServiceRequest;
-  data.images.forEach((image) => {
-    const [service] = services.filter((s) => s.image === image);
-    if (service) {
-      updateService(service);
-      res.status(200).json(service);
-      return;
-    }
-  });
-  if (!res.headersSent) {
-    res.status(404).json({ message: 'Dumb' });
-  }
+  const result = (req.body as UpdateServiceRequest).images.map((image) =>
+    services
+      .filter((s) => s.image === image)
+      .map((service) => {
+        updateService(service);
+
+        return service;
+      }),
+  );
+  res.status(200).json({ message: 'OK', result: result });
 });
 
 export const DockerController = [
